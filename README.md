@@ -12,6 +12,9 @@ Welcome to Help Desk Application, the app that makes it simple to manage help de
 - To access the platform, use help-desk-ticket-frontend.vercel.app. Currently, this site is deployed on a free-tier on Vercel for front end and Render for backend. 
 
 
+
+
+
 # Getting Started with Frontend
 
 - Fork and clone the repo to your local machine.

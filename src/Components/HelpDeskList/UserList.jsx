@@ -22,13 +22,20 @@ const UserList = ({ ticket }) => {
         </div>
         <div className="flex flex-col items-center gap-1">
           <span className="text-sm">Status</span>
-          <span className={`${status === "all" ? "text-white" : ""} ${
-          status === "new" ? "text-cyan-600" : ""
-        } ${status === "pending" ? "text-yellow-600" : ""} ${
-          status === "solved" ? "text-green-600" : ""
-        }`}>{status}</span>
+          <span
+            className={`${status === "all" ? "text-white" : ""} ${
+              status === "new" ? "text-cyan-600" : ""
+            } ${status === "pending" ? "text-yellow-600" : ""} ${
+              status === "resolved" ? "text-green-600" : ""
+            }`}
+          >
+            {status}
+          </span>
         </div>
-        <Link className="bg-transparent border-rgb px-5 py-2">View Details</Link>
+        <Link
+          to={`/list/${_id}`}
+          className="bg-transparent border-rgb px-5 py-2"
+        >View Details</Link>
       </div>
     </div>
   );
