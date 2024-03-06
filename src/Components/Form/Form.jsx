@@ -65,7 +65,7 @@ export const Form = () => {
         onSubmit={handleSubmit}
         className={`w-1/2 h-1/2 mx-auto mt-10 flex flex-col items-center gap-2 ${
           user.role === "admin" ? "hidden" : ""
-        } ${user?.email ? "hidden" : ""} `}
+        }`}
       >
         <span className="text-3xl text-white font-semibold pb-5">
           Help Desk
