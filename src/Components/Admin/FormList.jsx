@@ -32,6 +32,7 @@ const FormList = ({ ticket }) => {
       .then((data) => {
         if (data.status === "success") {
           toast.success("ticket accept successfully");
+          console.log("Would normally send email here with body: …")
           setTicketCount(ticketCount + 1);
         }
       });

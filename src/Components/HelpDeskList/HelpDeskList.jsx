@@ -42,7 +42,8 @@ const HelpDeskList = () => {
             {tickets.length < 1 ? (
               <div>
                 <h1 className="text-white text-3xl text-center">
-                  No Ticket found
+                  No Ticket found. 
+                  Please reload this page to view.
                 </h1>
               </div>
             ) : (

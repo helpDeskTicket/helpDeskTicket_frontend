@@ -55,6 +55,7 @@ const Solving = () => {
       .then((data) => {
         if (data.status === "success") {
           toast.success("ticket resolved successfully");
+          console.log("Would normally send email here with body: …")
           setTicketCount(ticketCount + 1);
           navigate("/admin");
         }
