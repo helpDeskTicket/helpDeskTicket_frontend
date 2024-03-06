@@ -1,9 +1,25 @@
-import { useNavigate } from "react-router-dom";
+/* eslint-disable no-unused-vars */
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ViewDetails = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  const [singleTicket, setSingleTicket] = useState({});
+  console.log(singleTicket);
+
+  const { title, createdBy, createdAt, status, description, resolved, resolvedAt } =
+    singleTicket;
+
+  useEffect(() => {
+    fetch(`https://helpdeskticket-backend.onrender.com/api/v1/ticket/getTicket/${id}`)
+      .then((res) => res.json())
+      .then((data) => setSingleTicket(data.result));
+  }, [id]);
+
   return (
-    <div className="w-full mt-10 flex flex-col items-center text-white gap-5 px-10">
+    <div className="w-full h-full mt-10 flex flex-col items-center text-white gap-5 px-10  overflow-y-scroll hidden-scrollbar pb-28">
       <div className="w-full flex items-start">
         <svg
           onClick={() => navigate("/list")}
@@ -35,80 +51,41 @@ const ViewDetails = () => {
           <div className="w-full flex items-center justify-between">
             <div className="flex flex-col items-center gap-1">
               <span className="text-sm">CreatedAt</span>
-              <span>12/2/2024</span>
+              <span>{createdAt}</span>
             </div>
             <div className="flex flex-col items-center gap-1">
               <span className="text-sm">CreatedBy</span>
-              <span>testing@gmail.com</span>
+              <span>{createdBy}</span>
             </div>
             <div className="flex flex-col items-center gap-1">
               <span className="text-sm">Title</span>
-              <span>my pc is not working</span>
+              <span>{title}</span>
             </div>
             <div className="flex flex-col items-center gap-1">
               <span className="text-sm">Status</span>
-              <span>In Progress</span>
+              <span
+                className={`${status === "all" ? "text-white" : ""} ${
+                  status === "new" ? "text-cyan-600" : ""
+                } ${status === "pending" ? "text-yellow-600" : ""} ${
+                  status === "resolved" ? "text-green-600" : ""
+                }`}
+              >
+                {status}
+              </span>
             </div>
           </div>
           <div className="w-full flex items-center">
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-sm">Description</span>
-              <span className="text-center text-[#d9e8e896] text-lg">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima
-                alias similique dolorem, aperiam harum autem saepe, sed atque
-                quaerat nisi dignissimos facere eum porro blanditiis expedita
-                sint labore officiis aspernatur rerum inventore. Quidem nesciunt
-                rem id aliquam ipsa commodi nisi, quibusdam accusamus ad,
-                explicabo labore dolorem! Iure eum esse pariatur nulla,
-                blanditiis alias itaque corporis hic commodi, harum voluptas
-                modi. Nihil a odit saepe, ad rem vero aliquid. Ratione delectus
-                aperiam commodi quidem magnam! Officia totam dolor saepe fugiat.
-                A aut repellat nostrum ex dolor aperiam reiciendis corporis
-                soluta quibusdam architecto magnam hic est tenetur, sequi quae
-                similique ipsa exercitationem, molestias beatae recusandae
-                explicabo expedita! Esse molestias aliquam quos voluptatibus
-                pariatur dolorem doloremque perspiciatis sint nobis voluptatum
-                tempora, enim ipsa, adipisci, sit error impedit officiis sequi
-                dolores in? Id quae quasi et, consequuntur, cum hic harum unde
-                tempora perferendis nulla excepturi, vel at ut qui magni
-                quibusdam adipisci pariatur? Quae quas nobis vitae nam mollitia,
-                facere error asperiores perferendis, minima ad voluptatem eum
-                eligendi deleniti? Quo, optio? Quas at tempora, perferendis est
-                adipisci aut! In quae sed aut repellat. Quia eligendi commodi
-                similique soluta ex odit error impedit asperiores?
+            <div className="flex flex-col items-start gap-1 text-start">
+              <span className="text-xl mt-3">Description</span>
+              <span className="text-center text-[#d9e8e896]">
+                {description}
               </span>
             </div>
           </div>
         </div>
-        <div className="w-full flex flex-col items-start justify-between gap-2">
+        <div className={`w-full flex flex-col items-start justify-between gap-2 ${status === "resolved" ? "" : "hidden"}`}>
           <span className="text-lg border-bottom">Answers</span>
-          <span className="text-lg text-[#d9e8e896]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt
-            sequi nisi vitae rerum, accusantium delectus aspernatur libero
-            facere consequatur provident ea nam quasi veritatis odit minus omnis
-            sit, vero distinctio inventore minima repellendus! Recusandae,
-            aliquid harum hic quos beatae magnam distinctio temporibus
-            cupiditate repellendus dignissimos debitis quidem fuga voluptatibus
-            maiores nemo consectetur iure illo doloribus a inventore ducimus
-            reprehenderit natus similique. Autem voluptatem dignissimos incidunt
-            quod praesentium saepe deserunt dicta mollitia temporibus deleniti,
-            aut molestiae a, veniam est illo quos, soluta voluptatum consectetur
-            alias labore? Nisi nostrum, nihil voluptatibus tempore natus quia
-            illo asperiores, placeat repellat debitis iusto magni velit aperiam
-            deserunt provident dolor facilis, deleniti odit! Nulla sunt, culpa
-            beatae molestiae at rem consequuntur recusandae tempore aliquid
-            labore, dignissimos neque maiores qui earum assumenda? Nobis,
-            sapiente? Nesciunt assumenda architecto similique quaerat magni
-            ipsum, asperiores ipsa sed fugit esse consequatur facere debitis sit
-            temporibus aliquid earum. Natus dignissimos in ab animi doloribus,
-            quo voluptatem ratione quod eaque, perferendis tenetur maiores
-            expedita velit tempore blanditiis omnis consequuntur saepe
-            perspiciatis illo libero nostrum impedit? Cumque architecto, beatae
-            temporibus neque tenetur sed vitae soluta omnis repudiandae
-            excepturi sapiente blanditiis inventore, necessitatibus rerum quam
-            nobis pariatur quisquam dolorem. Dignissimos repudiandae aspernatur
-            exercitationem iure explicabo.
-          </span>
+          <span className="text-lg text-[#d9e8e896]">{resolved}</span>
         </div>
       </div>
     </div>

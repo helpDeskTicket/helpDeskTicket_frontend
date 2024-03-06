@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
 import { useContext } from "react";
 import FormList from "./FormList";
@@ -12,7 +13,7 @@ const Admin = () => {
         className={`select  ml-[80%] ${filter === "all" ? "bg-white" : ""} ${
           filter === "new" ? "bg-cyan-600" : ""
         } ${filter === "pending" ? "bg-yellow-600" : ""} ${
-          filter === "solved" ? "bg-green-600" : ""
+          filter === "resolved" ? "bg-green-600" : ""
         }`}
         onChange={(e) => {
           setFilter(e.target.value);
@@ -27,16 +28,16 @@ const Admin = () => {
         <option value="pending" className="bg-yellow-600">
           Pending
         </option>
-        <option value="solved" className="bg-green-600">
-          Solved
+        <option value="resolved" className="bg-green-600">
+          resolved
         </option>
       </select>
-      <div className="w-full h-full grid gap-5 px-10 overflow-y-scroll mb-10 hidden-scrollbar">
+      <div className="w-full h-auto grid gap-5 px-10 overflow-y-scroll mb-10 hidden-scrollbar">
         {loading ? (
           <></>
         ) : (
           <>
-            {tickets.length < 0 ? (
+            {tickets.length < 1 ? (
               <>
                 <h1 className="text-white text-3xl text-center">
                   No Ticket found
@@ -44,9 +45,9 @@ const Admin = () => {
               </>
             ) : (
               <>
-              {
-                
-              }
+                {tickets.map((ticket) => (
+                  <FormList key={ticket._id} ticket={ticket}></FormList>
+                ))}
               </>
             )}
           </>

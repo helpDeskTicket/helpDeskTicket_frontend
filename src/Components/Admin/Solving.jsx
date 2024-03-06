@@ -25,7 +25,7 @@ const Solving = () => {
   } = singleTicket;
 
   useEffect(() => {
-    fetch(`https://tms-server-hzd8.onrender.com/api/v1/ticket/getTicket/${id}`)
+    fetch(`https://helpdeskticket-backend.onrender.com/api/v1/ticket/getTicket/${id}`)
       .then((res) => res.json())
       .then((data) => setSingleTicket(data.result));
   }, [id]);
@@ -44,7 +44,7 @@ const Solving = () => {
 
     console.log(resolvedData);
 
-    fetch("https://helpdeskticket-backend.onrender.com/api/v1/ticket/slove", {
+    fetch("https://helpdeskticket-backend.onrender.com/api/v1/ticket/solve", {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
