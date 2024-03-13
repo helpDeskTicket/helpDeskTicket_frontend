@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../api/userContext";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { format } from "date-fns";
 import { TicketContext } from "../../api/ticketContext";
@@ -73,7 +73,12 @@ export const Form = () => {
 
 
         <span className={`text-1xl pb-5 ${user?.email ? "hidden" : ""}`}>
-          you MUST <a href="/login">login</a> to submit ticket
+          you MUST <NavLink
+            to="/login"
+            style={{ color: 'white', fontWeight: 'bold', textDecoration: 'underline' }}
+          >
+            Login
+          </NavLink> to submit ticket
         </span>
 
         <div className="w-full flex flex-col items-start gap-1">
