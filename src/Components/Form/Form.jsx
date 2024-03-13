@@ -71,8 +71,9 @@ export const Form = () => {
           Help Desk
         </span>
 
+
         <span className={`text-1xl pb-5 ${user?.email ? "hidden" : ""}`}>
-          you MUST login to submit ticket
+          you MUST <a href="/login">login</a> to submit ticket
         </span>
 
         <div className="w-full flex flex-col items-start gap-1">
