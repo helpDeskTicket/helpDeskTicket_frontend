@@ -4,12 +4,15 @@ import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import setTokenToLocalStroge from "../SetTokenToLocal/SetTokenToLocal";
 import { AuthContext } from "../../api/userContext";
+import { TicketContext } from "../../api/ticketContext";
 
 const Login = () => {
   // context api
   const { setCount, count } = useContext(AuthContext);
+  const { ticketCount, setTicketCount } = useContext(TicketContext);
   // all state
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -27,8 +30,8 @@ const Login = () => {
     };
 
     console.log(user);
-
-    fetch("https://helpdeskticket-backend.onrender.com/api/v1/user/signin", {
+    setLoading(true);
+    fetch(`${import.meta.env.VITE_API_URL}/user/signin`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -38,11 +41,14 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "success") {
+          setLoading(false);
           toast.success("User login successfully");
           navigate("/");
           setTokenToLocalStroge(data?.userData?.token);
           setCount(count + 1);
+          setTicketCount(ticketCount + 1);
         } else {
+          setLoading(false);
           setError(data?.error);
         }
       });
@@ -50,7 +56,7 @@ const Login = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-1/3 mx-auto mt-10 flex flex-col items-center gap-2"
+      className="max-w-[600px] w-full px-5 mx-auto mt-10 flex flex-col items-center gap-2"
     >
       <span className="text-3xl text-white font-semibold pb-5">Login</span>
       <div className="w-full flex flex-col items-start gap-1">
@@ -85,12 +91,18 @@ const Login = () => {
         </h1>
       </Link>
       <h1 className="text-white mt-5 text-start">
-          {`Admin email : admin@gmail.com   Admin password : 123456`}{" "}
-        </h1>
+        {`Admin email : admin@gmail.com   Admin password : 123456`}{" "}
+      </h1>
       <button
+        disabled={loading === true}
         type="submit"
-        className="bg-slate-100 hover:bg-slate-200 px-7 py-2 rounded mt-5"
+        className="bg-slate-100 hover:bg-slate-200 px-7 disabled:bg-[#64748b] disabled:cursor-not-allowed py-2 rounded mt-5 text-black font-medium gap-2 flex items-center"
       >
+        {loading === true ? (
+          <span className="loading loading-spinner loading-md"></span>
+        ) : (
+          ""
+        )}
         Login
       </button>
     </form>

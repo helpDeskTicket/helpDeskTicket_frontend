@@ -26,7 +26,7 @@ const Solving = () => {
   } = singleTicket;
 
   useEffect(() => {    
-    fetch(`https://helpdeskticket-backend.onrender.com/api/v1/ticket/getTicket/${id}`)
+    fetch(`${import.meta.env.VITE_API_URL}/ticket/getTicket/${id}`)
       .then((res) => res.json())
       .then((data) => setSingleTicket(data.result));
   }, [id]);
@@ -45,7 +45,7 @@ const Solving = () => {
 
     console.log(resolvedData);
     setLoading(true)
-    fetch("https://helpdeskticket-backend.onrender.com/api/v1/ticket/solve", {
+    fetch(`${import.meta.env.VITE_API_URL}/ticket/solve`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

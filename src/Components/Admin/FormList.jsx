@@ -23,11 +23,11 @@ const FormList = ({ ticket }) => {
 
   const AcceptTicket = () => {
     fetch(
-      `https://helpdeskticket-backend.onrender.com/api/v1/ticket//accept/${_id}`,
+      `${import.meta.env.VITE_API_URL}/ticket/accept/${_id}`,
       {
         method: "PATCH",
         headers: {
-          "content-type": "applicatin/json",
+          "content-type": "application/json",
         },
       }
     )

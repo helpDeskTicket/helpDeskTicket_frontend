@@ -41,7 +41,7 @@ export const Form = () => {
       createdBy: emailRef.current.value,
     };
 
-    fetch("https://helpdeskticket-backend.onrender.com/api/v1/ticket/create", {
+    fetch(`${import.meta.env.VITE_API_URL}/ticket/create`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

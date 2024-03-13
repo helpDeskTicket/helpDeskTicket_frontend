@@ -13,7 +13,7 @@ const TicketContextProvider = ({ children }) => {
   useEffect(() => {
     setLoading(true);
     const token = localStorage.getItem("token");
-    fetch(`https://helpdeskticket-backend.onrender.com/api/v1/ticket/allticket?filter=${filter}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/ticket/allticket?filter=${filter}`, {
       headers: {
         authorization: `bearer ${token}`,
       },
@@ -23,7 +23,7 @@ const TicketContextProvider = ({ children }) => {
         setTikets(data.result);
         setLoading(false);
       });
-  }, [filter]);
+  }, [filter, ticketCount]);
   const contextValue = {
     tickets,
     filter,

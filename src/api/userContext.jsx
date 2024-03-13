@@ -20,7 +20,7 @@ const UserContext = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    fetch("https://helpdeskticket-backend.onrender.com/api/v1/user/getuser", {
+    fetch(`${import.meta.env.VITE_API_URL}/user/getuser`, {
       method: "GET",
       headers: {
         authorization: `bearer ${token}`,
